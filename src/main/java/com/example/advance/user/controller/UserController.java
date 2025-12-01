@@ -20,9 +20,13 @@ public class UserController {
     private final JwtUtil jwtUtil;
 
     @GetMapping("/get")
-    public String getUserInfo() {
+    public String getUserInfo(HttpServletRequest request) {
+        String username = (String) request.getAttribute("username");
+
+        log.info(username);
+
         log.info("호출");
-        return "호출되었음";
+        return username;
     }
 
 
