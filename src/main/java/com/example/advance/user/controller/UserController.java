@@ -3,6 +3,7 @@ package com.example.advance.user.controller;
 import com.example.advance.common.utils.JwtUtil;
 import com.example.advance.user.model.reqeust.LoginRequest;
 import com.example.advance.user.model.response.LoginResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,29 @@ public class UserController {
         String token = jwtUtil.generateToken(request.getUsername());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new LoginResponse(token));
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<Boolean> checkValidate(HttpServletRequest request) {
+
+        String authorizationToken = request.getHeader("Authorization");
+
+        String jwt = authorizationToken.substring(7);
+
+        boolean validate = jwtUtil.validateToken(jwt);
+
+        return ResponseEntity.ok(validate);
+    }
+
+    @GetMapping("/username")
+    public ResponseEntity<String> getUsername(HttpServletRequest request) {
+
+        String authorizationHeader = request.getHeader("Authorization");
+
+        String jwt = authorizationHeader.substring(7);
+
+        String username = jwtUtil.extractUsername(jwt);
+
+        return ResponseEntity.ok(username);
     }
 }

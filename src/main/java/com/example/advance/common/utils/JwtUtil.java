@@ -1,5 +1,6 @@
 package com.example.advance.common.utils;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -24,7 +25,7 @@ public class JwtUtil {
     private JwtParser parser;
 
 
-    @Value("jwt.secret.key")
+    @Value("${jwt.secret.key}")
     private String secretKeyString;
 
     @PostConstruct
@@ -41,6 +42,8 @@ public class JwtUtil {
         Date now = new Date();
         return BEARER_PREFIX + Jwts.builder()
                 .claim("username", username)
+                .claim("email", "lee@seo.jun")
+                .claim("nbcam","test")
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + TOKEN_TIME))
                 .signWith(key, Jwts.SIG.HS256)
@@ -58,5 +61,18 @@ public class JwtUtil {
             log.debug("Invalid JWT: {}", e.toString());
             return false;
         }
+    }
+
+    //토큰 복호화
+    private Claims extractAllClaims(String token) {
+        return parser.parseSignedClaims(token).getPayload();
+    }
+
+    public String extractUsername(String token) {
+        return extractAllClaims(token).get("username", String.class);
+    }
+
+    public String extractEmail(String token) {
+        return extractAllClaims(token).get("email", String.class);
     }
 }

@@ -1,6 +1,8 @@
 spring:
   application:
-    name: newsfeed
+    name: advance
+  config:
+    import: optional:file:.env[.properties]
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}
@@ -19,4 +21,4 @@ spring:
 ---
 jwt:
   secret:
-    key: qweasdzxcqweasdzxcrtyfghvbnrtyfghvbnrtyfghvbnqweasdzxc
+    key: qweasdzxcqweasdzxcrtyfghvbnrtyfghvbnrtyfghvbnqweasdzxcqweqweqweqweqweqweqwewqeqweqwewq
