@@ -34,10 +34,10 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, SecurityContextHolderAwareRequestFilter.class)
                 .authorizeHttpRequests(auth ->  auth
-                        .requestMatchers("/api/user/login").permitAll()
-                        .requestMatchers("/api/user/get").permitAll()
-                        .requestMatchers("/api/user/username").permitAll()
-                        .requestMatchers("/api/user/validate").permitAll()
+                        .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/normal/**").hasRole("NORMAL")
+                        .anyRequest().authenticated() //내가 지정한 특정 url말고 다 열어줌
                 )
                 .build();
     }

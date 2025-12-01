@@ -1,5 +1,6 @@
 package com.example.advance.common.filter;
 
+import com.example.advance.common.enums.UserRoleEnum;
 import com.example.advance.common.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -32,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         // JWT 토큰이 있는지 없는지 검사
         String requestUrl = request.getRequestURI();
 
-        if (requestUrl.equals("/api/user/login")) {
+        if (requestUrl.equals("/api/login")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -60,8 +61,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
 //        request.setAttribute("username", username); -> Spring Security 방식에 맞는 방법으로 만들 예정
 
+        String auth = jwtUtil.extractRole(jwt);
+
+        UserRoleEnum userRoleEnum = UserRoleEnum.valueOf(auth);
+
         //Spring Security에서 사용하는 User객체를
-        User user = new User(username, "", List.of());
+        User user = new User(username, "", List.of(userRoleEnum::getRole));
 
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()));
 
