@@ -1,6 +1,7 @@
 package com.example.advance.user.controller;
 
 import com.example.advance.common.utils.JwtUtil;
+import com.example.advance.user.model.dto.UserDto;
 import com.example.advance.user.model.reqeust.UpdateUserEmailRequest;
 import com.example.advance.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,4 +71,31 @@ public class UserController {
 
     }
 
+    //JPQL을 통한 CRUD 실습
+
+    //1. 조회
+    //2. 수정
+    //3. 삭제
+
+    @GetMapping("/{username}/jpql")
+    public ResponseEntity<UserDto> getUserByUsernameWithJpql(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserByUsername(username));
+    }
+
+
+    @PutMapping("/{username}/email/jpql")
+    public ResponseEntity<UserDto> updateEmailByJpql(@PathVariable String username, @RequestBody UpdateUserEmailRequest request) {
+
+        ;
+        return ResponseEntity.ok(userService.updateUserEmailByJpql(username, request.getEmail()));
+    }
+
+    @DeleteMapping("/{username}/jpql")
+    public ResponseEntity<String> deleteUserByJpql(@PathVariable String username) {
+
+        userService.deleteUserByJpql(username);
+
+        return ResponseEntity.ok("삭제 완료");
+
+    }
 }

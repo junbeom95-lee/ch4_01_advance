@@ -2,6 +2,7 @@ package com.example.advance.user.service;
 
 import com.example.advance.common.entity.User;
 import com.example.advance.common.utils.JwtUtil;
+import com.example.advance.user.model.dto.UserDto;
 import com.example.advance.user.model.reqeust.LoginRequest;
 import com.example.advance.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,34 @@ public class UserService {
         userRepository.save(user);
 
         log.info("5번 째 : 서비스 레이어 메서드 실행 완료");
+    }
+
+    @Transactional
+    public UserDto updateUserEmailByJpql(String username, String email) {
+
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new IllegalArgumentException("등록된 사용자가 없습니다.")
+        );
+
+        userRepository.updateUserEmailByJpql(username, email);
+
+        user.updateEmail(email);
+
+        return UserDto.from(user);
+    }
+
+
+    @Transactional
+    public UserDto getUserByUsername(String username) {
+
+        User user = userRepository.findUserByUsername(username).orElseThrow( () ->
+                new IllegalArgumentException("등록된 사용자가 없습니다."));
+
+        return UserDto.from(user);
+    }
+
+    @Transactional
+    public void deleteUserByJpql(String username) {
+        userRepository.deleteUserByJpql(username);
     }
 }
