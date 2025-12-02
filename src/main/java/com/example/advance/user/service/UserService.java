@@ -51,5 +51,6 @@ public class UserService {
         user.updateEmail(email);
         userRepository.save(user);
 
+        log.info("5번 째 : 서비스 레이어 메서드 실행 완료");
     }
 }

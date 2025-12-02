@@ -19,13 +19,13 @@ public class NbcamFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         //요청이 들어올 때 실행되는 부분
-        System.out.println("NbcamFilter로 들어감");
+//        System.out.println("NbcamFilter로 들어감");
 
         filterChain.doFilter(request, response);
 
         //요청이 나갈 때 실행되는 부분
 
-        System.out.println("NbcamFilter로 나감");
+//        System.out.println("NbcamFilter로 나감");
 
     }
 }
