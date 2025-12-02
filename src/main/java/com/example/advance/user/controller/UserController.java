@@ -1,14 +1,13 @@
 package com.example.advance.user.controller;
 
 import com.example.advance.common.utils.JwtUtil;
-import com.example.advance.user.model.reqeust.LoginRequest;
-import com.example.advance.user.model.response.LoginResponse;
+import com.example.advance.user.model.reqeust.UpdateUserEmailRequest;
+import com.example.advance.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +18,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
-    //    private final UserService userService;
+    private final UserService userService;
     private final JwtUtil jwtUtil;
 
-//    @PreAuthorize("hasRole('ADMIN')")
+
+    //    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get")
     public String getUserInfo(@AuthenticationPrincipal User user) {
         String username = user.getUsername();
@@ -56,4 +56,15 @@ public class UserController {
 
         return ResponseEntity.ok(username);
     }
+
+    @PutMapping("/{username}/email")
+    public ResponseEntity<String> updateEmail(@PathVariable String username, @RequestBody UpdateUserEmailRequest request) {
+
+        userService.updateUserEmail(username, request.getEmail());
+
+        return ResponseEntity.ok("수정 완료");
+
+    }
+
+    //
 }

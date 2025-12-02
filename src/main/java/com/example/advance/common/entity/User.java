@@ -35,4 +35,8 @@ public class User {
         this.email = email;
         this.roleEnum = roleEnum;
     }
+
+    public void updateEmail(String email) {
+        this.email = email;
+    }
 }
