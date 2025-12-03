@@ -1,4 +1,4 @@
-package com.example.advance.user.controller;
+package com.example.advance.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

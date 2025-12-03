@@ -1,8 +1,8 @@
-package com.example.advance.user.controller;
+package com.example.advance.domain.user.controller;
 
-import com.example.advance.user.model.reqeust.LoginRequest;
-import com.example.advance.user.model.response.LoginResponse;
-import com.example.advance.user.service.UserService;
+import com.example.advance.domain.user.model.reqeust.LoginRequest;
+import com.example.advance.domain.user.model.response.LoginResponse;
+import com.example.advance.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

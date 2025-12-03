@@ -1,13 +1,12 @@
-package com.example.advance.user.controller;
+package com.example.advance.domain.user.controller;
 
 import com.example.advance.common.utils.JwtUtil;
-import com.example.advance.user.model.dto.UserDto;
-import com.example.advance.user.model.reqeust.UpdateUserEmailRequest;
-import com.example.advance.user.service.UserService;
+import com.example.advance.domain.user.model.dto.UserDto;
+import com.example.advance.domain.user.model.reqeust.UpdateUserEmailRequest;
+import com.example.advance.domain.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;

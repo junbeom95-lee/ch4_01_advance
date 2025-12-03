@@ -1,10 +1,10 @@
-package com.example.advance.user.service;
+package com.example.advance.domain.user.service;
 
 import com.example.advance.common.entity.User;
 import com.example.advance.common.utils.JwtUtil;
-import com.example.advance.user.model.dto.UserDto;
-import com.example.advance.user.model.reqeust.LoginRequest;
-import com.example.advance.user.repository.UserRepository;
+import com.example.advance.domain.user.model.dto.UserDto;
+import com.example.advance.domain.user.model.reqeust.LoginRequest;
+import com.example.advance.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

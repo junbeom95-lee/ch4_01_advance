@@ -1,4 +1,4 @@
-package com.example.advance.user.model.dto;
+package com.example.advance.domain.user.model.dto;
 
 import com.example.advance.common.entity.User;
 import com.example.advance.common.enums.UserRoleEnum;
